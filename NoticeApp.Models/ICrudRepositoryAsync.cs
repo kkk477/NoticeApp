@@ -7,7 +7,7 @@
 	public interface ICrudRepositoryAsync<T>
 	{
 		Task<T> AddAsync(T model);	// 입력
-		Task<T> GetAllAsync();	// 출력
+		Task<List<T>> GetAllAsync();	// 출력
 		Task<T> GetByIdAsync(int id);	// 상세
 		Task<T> EditAsync(T model);	// 수정
 		Task<T> DeleteAsync(int id);	// 삭제

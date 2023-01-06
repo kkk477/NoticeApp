@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Protocols;
 using System;
 using System.Collections.Generic;
@@ -39,9 +40,9 @@ namespace NoticeApp.Models
 		}
 
 		// 출력
-		public Task<Notice> GetAllAsync()
+		public async Task<List<Notice>> GetAllAsync()
 		{
-			throw new NotImplementedException();
+			return await _context.Notices.OrderByDescending(m => m.Id).ToListAsync();
 		}
 
 		// 상세
