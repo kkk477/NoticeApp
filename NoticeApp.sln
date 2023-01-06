@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes", "Notes", "{0C29469A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoticeApp.Models", "NoticeApp.Models\NoticeApp.Models.csproj", "{247E8FBE-360B-46B8-85F0-513391B57C0E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoticeApp.Models.Tests", "NoticeApp.Models.Tests\NoticeApp.Models.Tests.csproj", "{459D799D-C808-483F-81DA-CA6033F5B514}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,6 +30,10 @@ Global
 		{247E8FBE-360B-46B8-85F0-513391B57C0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{247E8FBE-360B-46B8-85F0-513391B57C0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{247E8FBE-360B-46B8-85F0-513391B57C0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{459D799D-C808-483F-81DA-CA6033F5B514}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{459D799D-C808-483F-81DA-CA6033F5B514}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{459D799D-C808-483F-81DA-CA6033F5B514}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{459D799D-C808-483F-81DA-CA6033F5B514}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -3,8 +3,8 @@ CREATE TABLE [dbo].[Notices]
 (
 	[Id] INT NOT NULL PRIMARY KEY Identity(1,1),	-- Serial Number
 	[ParentId] Int Null,							-- ParentId
-	[Name] NVarChar(100) Not Null,					-- 작성자
-	[Title] NVarChar(255) Not Null,					-- 제목
+	[Name] NVarChar(100) NOT Null,					-- 작성자
+	[Title] NVarChar(255) NOT Null,					-- 제목
 	[Contents] NVarChar(Max) Null,					-- 내용
 	[IsPinned] Bit Null Default(0),					-- 공지글로 올리기
 	[CreatedBy] NVarChar(255) Null,					-- 등록자

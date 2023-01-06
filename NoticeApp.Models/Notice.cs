@@ -41,7 +41,7 @@ namespace NoticeApp.Models
 		/// <summary>
 		/// 내용
 		/// </summary>
-		public string Content { get; set; }
+		public string? Content { get; set; }
 
 		/// <summary>
 		/// 상단 고정
@@ -51,7 +51,7 @@ namespace NoticeApp.Models
 		/// <summary>
 		/// 등록자
 		/// </summary>
-		public string CreatedBy { get; set; }
+		public string? CreatedBy { get; set; }
 
 		/// <summary>
 		/// 등록일
@@ -61,7 +61,7 @@ namespace NoticeApp.Models
 		/// <summary>
 		/// 수정자
 		/// </summary>
-		public string ModifiedBy { get; set; }
+		public string? ModifiedBy { get; set; }
 
 		/// <summary>
 		/// 수정일
