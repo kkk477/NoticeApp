@@ -31,7 +31,7 @@ namespace NoticeApp.Models.Tests
 			{
 				//[A] Arrange
 				var repositry = new NoticeRepositoryAsync(context, factory);
-				var model = new Notice { Name = "[1] 관리자", Title = "공지사항입니다.", Content = "내용입니다." };
+				var model = new Notice { Name = "[1] 관리자", Title = "공지사항입니다.", Contents = "내용입니다." };
 				//[B] Act
 				await repositry.AddAsync(model);
 			}
@@ -51,7 +51,7 @@ namespace NoticeApp.Models.Tests
 			{
 				//[A] Arrange
 				var repositry = new NoticeRepositoryAsync(context, factory);
-				var model = new Notice { Name = "[2] 홍길동", Title = "공지사항입니다.", Content = "내용입니다." };
+				var model = new Notice { Name = "[2] 홍길동", Title = "공지사항입니다.", Contents = "내용입니다." };
 				//[B] Act
 				await repositry.AddAsync(model);
 				await repositry.AddAsync(new Notice { Name = "[3] 백두산", Title = "공지사항입니다." });

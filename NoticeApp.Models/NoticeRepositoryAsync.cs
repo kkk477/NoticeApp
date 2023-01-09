@@ -54,7 +54,7 @@ namespace NoticeApp.Models
 				//.Include(m => m.NoticesComents)
 				.SingleOrDefaultAsync(m => m.Id == id);
 		}
-
+		
 		// 수정
 		public async Task<bool> EditAsync(Notice model)
 		{

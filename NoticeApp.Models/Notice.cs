@@ -41,7 +41,7 @@ namespace NoticeApp.Models
 		/// <summary>
 		/// 내용
 		/// </summary>
-		public string? Content { get; set; }
+		public string? Contents { get; set; }
 
 		/// <summary>
 		/// 상단 고정
