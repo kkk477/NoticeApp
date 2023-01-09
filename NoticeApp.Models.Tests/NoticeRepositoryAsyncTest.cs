@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
@@ -62,8 +63,26 @@ namespace NoticeApp.Models.Tests
 				var repositry = new NoticeRepositoryAsync(context, factory);
 				var models = await repositry.GetAllAsync(); ;
 				Assert.AreEqual(3, models.Count);
-			} 
+			}
 			#endregion
+
+			// GetStatus() Method Test
+			using (var context = new NoticeAppDbContext(options))
+			{
+				int parentId = 1;
+
+				var no1 = await context.Notices.Where(m => m.Id == 1).SingleOrDefaultAsync();
+				no1.ParentId = 1;
+				no1.IsPinned= true;	// Pinned
+
+				context.Entry(no1).State= EntityState.Modified;
+				context.SaveChanges();
+
+				var repository = new NoticeRepositoryAsync(context, factory);
+				var r = await repository.GetStatus(parentId);
+
+				Assert.AreEqual(1, r.Item1);	// Pinned Count == 1
+			}
 		}
 	}
 }
