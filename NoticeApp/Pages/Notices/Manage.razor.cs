@@ -63,7 +63,7 @@ namespace NoticeApp.Pages.Notices
 		protected async void EditBy(Notice model)
 		{
 			EditorFormTitle = "EDIT";
-			model = model;
+			this.model = model;
 			EditorFormReference.Show();
 		}
 
