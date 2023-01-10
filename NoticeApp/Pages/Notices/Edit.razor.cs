@@ -36,6 +36,5 @@ namespace NoticeApp.Pages.Notices
 			await NoticeRepositoryAsyncReference.EditAsync(model);
 			NavigationManagerReference.NavigateTo("/Notices");
 		}
-
 	}
 }

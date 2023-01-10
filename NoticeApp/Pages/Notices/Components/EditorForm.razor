@@ -1,1 +1,60 @@
-﻿<h3>EditorForm</h3>
+﻿@if (isShow)
+{
+	<div class="modal fade show d-block" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">@EditorFormTitle</h5>
+					<button type="button" class="btn-close" data-bs-dissmiss="modal" aria-label="Close" @onclick="Hide">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<EditForm Model="Model" OnValidSubmit="CreateOrEditClick">
+						<DataAnnotationsValidator></DataAnnotationsValidator>
+						<ValidationSummary></ValidationSummary>
+						@if (Model.Id != 0)
+						{
+							<label for="id" class="col-sm-2 col-form-label">Id: </label>
+							<input type="hidden" @bind-value="@Model.Id"></input>
+							<div class="col-sm-10">
+								<input type="text" class="form-control-plaintext" id="id" value="@Model.Id" />
+							</div>
+						}
+						<div class="form-group">
+							<label for="txtName">Name</label>
+							<InputText id="txtName" class="form-control" @bind-Value="@Model.Name"></InputText>
+							<ValidationMessage For="@(() => Model.Name)" class="form-text text-muted"></ValidationMessage>
+						</div>
+						<div class="form-group">
+							<label for="txtTitle">Title</label>
+							<InputText id="txtTitle" class="form-control" @bind-Value="@Model.Title"></InputText>
+							<ValidationMessage For="@(() => Model.Title)" class="form-text text-muted"></ValidationMessage>
+						</div>
+						<div class="form-group">
+							<label for="txtContents">Contents</label>
+							<InputText id="txtContents" class="form-control" @bind-Value="@Model.Contents"></InputText>
+							<ValidationMessage For="@(() => Model.Contents)" class="form-text text-muted"></ValidationMessage>
+						</div>
+						<div class="form-group">
+							<label for="lstCategory">Parents</label>
+							<InputSelect @bind-Value="@parentId" class="form-control" id="lstCategory">
+								<option value="">--Select Parent--</option>
+								@foreach (var p in parentIds)
+								{
+									<option Value="@p">@p</option>
+								}
+							</InputSelect>
+
+							<ValidationMessage For="@(() => parentId)" class="form-text text-muted"></ValidationMessage>
+						</div>
+						<div class="form-group">
+							<button type="submit" class="btn btn-primary">Submit</button>
+							<button type="submit" class="btn btn-secondary" @onclick="Hide">Cancel</button>
+						</div>
+					</EditForm>
+				</div>
+			</div>
+		</div>
+	</div>
+}
