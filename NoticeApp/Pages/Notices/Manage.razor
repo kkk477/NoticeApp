@@ -59,6 +59,7 @@
 							</td>
 							<td>
 								<input type="button" name="btnEdit" value="Edit with Modal" class="btn btn-primary" @onclick="(() => EditBy(m))" />
+								<input type="button" name="btnDelete" value="Delete with Modal" class="btn btn-primary" @onclick="(() => DeleteBy(m))" />
 							</td>
 						</tr>
 					}
@@ -74,3 +75,5 @@
 <NoticeApp.Pages.Notices.Components.EditorForm @ref="EditorFormReference" Model="model" CreateCallback="CreateOrEdit" EditCallback="CreateOrEdit">
 	<EditorFormTitle>@EditorFormTitle</EditorFormTitle>
 </NoticeApp.Pages.Notices.Components.EditorForm>
+<NoticeApp.Pages.Notices.Components.DeleteDialog @ref="DeleteDialogReference" OnClick="DeleteClick">
+</NoticeApp.Pages.Notices.Components.DeleteDialog>

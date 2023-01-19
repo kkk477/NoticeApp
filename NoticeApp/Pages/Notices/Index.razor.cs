@@ -45,8 +45,6 @@ namespace NoticeApp.Pages.Notices
 			pager.PageNumber = pageIndex + 1;
 
 			await DisplayData();
-
-			StateHasChanged();
 		}
 	}
 }

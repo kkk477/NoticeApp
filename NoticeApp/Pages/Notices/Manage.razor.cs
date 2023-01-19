@@ -14,6 +14,7 @@ namespace NoticeApp.Pages.Notices
 		public NavigationManager NavigationManagerReference { get; set; }
 
 		public EditorForm EditorFormReference { get; set; }
+		public DeleteDialog DeleteDialogReference { get; set; }
 		protected List<Notice> models;
 		private Notice model = new Notice();
 
@@ -35,6 +36,8 @@ namespace NoticeApp.Pages.Notices
 			var resultSet = await NoticeRepositoryAsyncReference.GetAllAsync(pager.PageIndex, pager.PageSize);
 			pager.PageCount = resultSet.TotalRecords;
 			models = resultSet.Records.ToList();
+
+			StateHasChanged();
 		}
 
 		protected void NameClick(int id)
@@ -48,8 +51,6 @@ namespace NoticeApp.Pages.Notices
 			pager.PageNumber = pageIndex + 1;
 
 			await DisplayData();
-
-			StateHasChanged();
 		}
 
 		public string EditorFormTitle { get; set; } = "CREATE";
@@ -67,11 +68,24 @@ namespace NoticeApp.Pages.Notices
 			EditorFormReference.Show();
 		}
 
+		protected async void DeleteBy(Notice model)
+		{
+			this.model = model;
+			DeleteDialogReference.Show();
+		}
+
+		protected async void DeleteClick()
+		{
+			await NoticeRepositoryAsyncReference.DeleteAsync(this.model.Id);
+			DeleteDialogReference.Hide();
+			this.model = new Notice();
+			await DisplayData();
+		}
+
 		protected async void CreateOrEdit()
 		{
 			EditorFormReference.Hide();
 			await DisplayData();
-			StateHasChanged();
 		}
 	}
 }
