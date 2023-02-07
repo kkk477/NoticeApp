@@ -59,6 +59,6 @@ app.Run();
 void AddDependencyInjectionContainerForNoticeApp(WebApplicationBuilder builder)
 {
     // NoticeAppDbContext.cs Inject
-    builder.Services.AddEntityFrameworkSqlServer().AddDbContext<NoticeAppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    builder.Services.AddEntityFrameworkSqlServer().AddDbContext<NoticeAppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Transient);
     builder.Services.AddTransient<INoticeRepositoryAsync, NoticeRepositoryAsync>();
 }

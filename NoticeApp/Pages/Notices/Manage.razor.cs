@@ -7,6 +7,9 @@ namespace NoticeApp.Pages.Notices
 {
 	public partial class Manage
 	{
+		[Parameter]
+		public int ParentId { get; set; }
+
 		[Inject]
 		public INoticeRepositoryAsync NoticeRepositoryAsyncReference { get; set; }
 
@@ -17,6 +20,11 @@ namespace NoticeApp.Pages.Notices
 		public DeleteDialog DeleteDialogReference { get; set; }
 		protected List<Notice> models;
 		private Notice model = new Notice();
+
+		/// <summary>
+		/// 공지사항으로 올리기 폼을 띄울건지 여부
+		/// </summary>
+		public bool IsInlineDialogShow { get; set; } = false;
 
 		protected DulPagerBase pager = new DulPagerBase()
 		{
@@ -32,10 +40,19 @@ namespace NoticeApp.Pages.Notices
 
 		private async Task DisplayData()
 		{
-			//await Task.Delay(3000);
-			var resultSet = await NoticeRepositoryAsyncReference.GetAllAsync(pager.PageIndex, pager.PageSize);
-			pager.PageCount = resultSet.TotalRecords;
-			models = resultSet.Records.ToList();
+			if (ParentId == 0)
+			{
+				//await Task.Delay(3000);
+				var resultSet = await NoticeRepositoryAsyncReference.GetAllAsync(pager.PageIndex, pager.PageSize);
+				pager.PageCount = resultSet.TotalRecords;
+				models = resultSet.Records.ToList();
+			}
+			else
+			{
+				var resultSet = await NoticeRepositoryAsyncReference.GetAllByParentIdAsync(pager.PageIndex, pager.PageSize, ParentId);
+				pager.PageCount = resultSet.TotalRecords;
+				models = resultSet.Records.ToList();
+			}
 
 			StateHasChanged();
 		}
@@ -74,10 +91,32 @@ namespace NoticeApp.Pages.Notices
 			DeleteDialogReference.Show();
 		}
 
+		protected async void ToggleBy(Notice model)
+		{
+			this.model = model;
+			IsInlineDialogShow = !IsInlineDialogShow;
+		}
+
 		protected async void DeleteClick()
 		{
 			await NoticeRepositoryAsyncReference.DeleteAsync(this.model.Id);
 			DeleteDialogReference.Hide();
+			this.model = new Notice();
+			await DisplayData();
+		}
+
+		protected async void ToggleClose()
+		{
+			IsInlineDialogShow = false;
+			this.model = new Notice();
+		}
+
+		protected async void ToggleClick()
+		{
+			this.model.IsPinned = !this.model.IsPinned;
+
+			await NoticeRepositoryAsyncReference.EditAsync(this.model);
+			IsInlineDialogShow = false;
 			this.model = new Notice();
 			await DisplayData();
 		}
