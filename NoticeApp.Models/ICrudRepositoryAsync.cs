@@ -12,6 +12,7 @@
 		Task<bool> EditAsync(T model);	// 수정
 		Task<bool> DeleteAsync(int id);	// 삭제
 		Task<PagingResult<T>> GetAllAsync(int pageIndex, int pageSize);	// 페이징
-		Task<PagingResult<T>> GetAllByParentIdAsync(int pageIndex, int pageSize, int parentId);	// 부모
+		Task<PagingResult<T>> GetAllByParentIdAsync(int pageIndex, int pageSize, int parentId); // 부모
+		Task<PagingResult<T>> SearchAllAsync(int pageIndex, int pageSize, string searchQuery); // 검색
 	}
 }

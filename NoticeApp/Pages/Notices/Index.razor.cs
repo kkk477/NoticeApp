@@ -46,5 +46,10 @@ namespace NoticeApp.Pages.Notices
 
 			await DisplayData();
 		}
+
+		protected void Search(string query)
+		{
+			
+		}
 	}
 }
