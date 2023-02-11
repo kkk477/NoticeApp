@@ -1,4 +1,5 @@
 ﻿<div class="search">
-	<i class="oi oi-eye"></i>
-	<Input placeholder="Search..." @attributes="AdditionalAttributes" @bind="SearchQuery" @bind:event="oninput" />
+    <i class="oi oi-eye"></i>
+    <Input placeholder="Search..." @attributes="AdditionalAttributes" @bind-value="SearchQuery" @bind-value:event="oninput" />
+    <input type="button" value="Search" @onclick="Search"></input>
 </div>

@@ -73,6 +73,9 @@
 	<div class="col-md-12">
 		<DulPager.DulPagerComponent Model="pager" PageIndexChanged="PageIndexChanged"></DulPager.DulPagerComponent>
 	</div>
+	<div class="col-md-12">
+		<NoticeApp.Pages.Notices.Components.SearchBox placeholder="Search Notice..." SearchQueryChanged="Search"></NoticeApp.Pages.Notices.Components.SearchBox>
+	</div>
 </div>
 
 <NoticeApp.Pages.Notices.Components.EditorForm @ref="EditorFormReference" Model="model" CreateCallback="CreateOrEdit" EditCallback="CreateOrEdit">

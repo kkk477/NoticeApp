@@ -150,8 +150,26 @@ namespace NoticeApp.Models
 		// 검색
 		public async Task<PagingResult<Notice>> SearchAllAsync(int pageIndex, int pageSize, string searchQuery)
 		{
-			var totalRecords = await _context.Notices.CountAsync();
-			var models = await _context.Notices.Where(m => m.Name.Contains(searchQuery) || m.Title.Contains(searchQuery) || m.Title.Contains(searchQuery))
+			var totalRecords = await _context.Notices
+				.Where(m => m.Name.Contains(searchQuery) || m.Title.Contains(searchQuery) || m.Title.Contains(searchQuery))
+				.CountAsync();
+			var models = await _context.Notices
+				.Where(m => m.Name.Contains(searchQuery) || m.Title.Contains(searchQuery) || m.Title.Contains(searchQuery))
+				.OrderByDescending(m => m.Id)
+				//.Include(m => m.NoticesComments)
+				.Skip(pageIndex).Take(pageSize)
+				.Take(pageSize)
+				.ToListAsync();
+			return new PagingResult<Notice>(models, totalRecords);
+		}
+
+		public async Task<PagingResult<Notice>> SearchAllByParentIdAsync(int pageIndex, int pageSize, string searchQuery, int parentId)
+		{
+			var totalRecords = await _context.Notices.Where(m => m.ParentId == parentId)
+				.Where(m => m.Name.Contains(searchQuery) || m.Title.Contains(searchQuery) || m.Title.Contains(searchQuery))
+				.CountAsync();
+			var models = await _context.Notices.Where(m => m.ParentId == parentId)
+				.Where(m => m.Name.Contains(searchQuery) || m.Title.Contains(searchQuery) || m.Title.Contains(searchQuery))
 				.OrderByDescending(m => m.Id)
 				//.Include(m => m.NoticesComments)
 				.Skip(pageIndex).Take(pageSize)

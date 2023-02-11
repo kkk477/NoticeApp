@@ -21,6 +21,8 @@ namespace NoticeApp.Pages.Notices
 		protected List<Notice> models;
 		private Notice model = new Notice();
 
+		private string searchQuery;
+
 		/// <summary>
 		/// 공지사항으로 올리기 폼을 띄울건지 여부
 		/// </summary>
@@ -35,7 +37,10 @@ namespace NoticeApp.Pages.Notices
 		};
 		protected override async Task OnInitializedAsync()
 		{
-			await DisplayData();
+			if (String.IsNullOrEmpty(this.searchQuery))
+				await DisplayData();
+			else
+				await SearchData();
 		}
 
 		private async Task DisplayData()
@@ -125,6 +130,28 @@ namespace NoticeApp.Pages.Notices
 		{
 			EditorFormReference.Hide();
 			await DisplayData();
+		}
+
+		private async Task SearchData()
+		{
+			if (ParentId == 0)
+			{
+				var resultSet = await NoticeRepositoryAsyncReference.SearchAllAsync(pager.PageIndex, pager.PageSize, searchQuery);
+				pager.PageCount = resultSet.TotalRecords;
+				models = resultSet.Records.ToList();
+			}
+			else
+			{
+				var resultSet = await NoticeRepositoryAsyncReference.SearchAllByParentIdAsync(pager.PageIndex, pager.PageSize, searchQuery, ParentId);
+				pager.PageCount = resultSet.TotalRecords;
+				models = resultSet.Records.ToList();
+			}
+		}
+
+		protected async void Search(string query)
+		{
+			this.searchQuery = query;
+			await SearchData();
 		}
 	}
 }
